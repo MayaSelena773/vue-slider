@@ -1,12 +1,15 @@
 
-console.log(slides);
+// 1- al click su una thumb, visualizzare in grande l'immagine corrispondente
+// 2- applicare l'autoplay allo slider: ogni 3 secondi, 
+// cambia immagine automaticamente
+// 3- quando il mouse va in hover sullo slider, 
+// bloccare l'autoplay e farlo riprendere quando esce
 
 var app = new Vue (
-    
     {
-        el:'#app'
+        el:'#root',
         data: {
-
+            currentActiveElement: 0,
             slides: [
                 {
                     image: 'img/01.jpg',
@@ -32,8 +35,28 @@ var app = new Vue (
                     image: 'img/05.jpg',
                     title: 'Paradise',
                     text: 'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam, cumque provident totam omnis.',
-                }
+                },
             ]
+        },
+        methods: {
+            showNextElement() {
+                if(this.currentActiveElement < this.slides.length - 1) {
+
+                    this.currentActiveElement ++;
+                }else {
+
+                    this.currentActiveElement = 0;
+                }
+            },
+            showPreviousElement() {
+                if(this.currentActiveElement > 0) {
+
+                    this.currentActiveElement --;
+                }else {
+
+                    this.currentActiveElement = this.slides.length -1;
+                }
+            }
         }
     }
 
